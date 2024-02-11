@@ -13,9 +13,10 @@ class Satellite :
     def __str__(self):
         return f"Satellite aux coordonées {self.coordinates} avec une intensité de {self.intensity} J"
     
-    def get_range(self, cities_coordinates):
+    def in_range(self, city_coordinates):
         """Retourne la portée du satellite au sol i.e. le rayon du cercle de couverture"""
-        return None
+
+        return euclidean_distance(self.coordinates, city_coordinates) <= 8
     
 
 class City :
@@ -35,8 +36,9 @@ class City :
         """Retourne l'intensité reçue par la ville"""
         intensity = 0
         for satellite in satellites:
-            distance = euclidean_distance(self.coordinates, satellite.coordinates)
-            intensity += satellite.intensity / distance**2
+            distance = euclidean_distance(self.coordinates, satellite.coordinates)*satellite.in_range(self.coordinates)
+            if distance != 0:
+                intensity += satellite.intensity / distance**2
 
         return intensity
     
