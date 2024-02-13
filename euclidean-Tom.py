@@ -8,7 +8,8 @@ import folium # pour créer une carte interactive
 import webbrowser # ouvrir le fichier HTML dans le navigateur par défaut
 import os # ouvrir ds le navigateur
 
-
+# Créer une carte avec les villes et les satellites à METTRE À LA FIN Et on 
+# remplace les villes et sate par les réponses du solveur
 
 def create_map_with_cities_folium():
     # Centre de la carte pour l'affichage initial
@@ -144,22 +145,27 @@ create_map_with_cities()
 
 
 
+"""
+CODE POUR MINIMISER LA DISTANCE ENTRE LES SATELLITES ET LES VILLES SUR UN RECTANGLE
+
+"""
+
 
 def euclidean_distance(p1, p2):# Fonction pour calculer la distance euclidienne entre deux points
     return np.sqrt(np.sum((p1 - p2) ** 2))
 
 # Fonction pour calculer la distance totale entre sate LE PLUS PROCHE et villes
-def total_distance(satellite_positions, cities_coordinates, cities_weights):
-    total_dist = 0
-    for i, city_coord in enumerate(cities_coordinates):
-        min_dist = np.inf
-        for satellite_pos in satellite_positions:
-            distances = [euclidean_distance(city_coord, satellite_position) for satellite_position in satellite_positions]
-            dist = min(distances)
-            if dist < min_dist:
-                min_dist = dist
-        total_dist += min_dist * cities_weights[i]
-    return total_dist
+#def total_distance(satellite_positions, cities_coordinates, cities_weights):
+#    total_dist = 0
+#    for i, city_coord in enumerate(cities_coordinates):
+#        min_dist = np.inf
+#        for satellite_pos in satellite_positions:
+#            distances = [euclidean_distance(city_coord, satellite_position) for satellite_position in satellite_positions]
+#            dist = min(distances)
+#            if dist < min_dist:
+#                min_dist = dist
+#        total_dist += min_dist * cities_weights[i]
+#    return total_dist
 
 # Fonction pour vérifier si l'intensité reçue est acceptable, on dit que intensité est une distance et on met un treshold
 def is_intensity_acceptable(satellite_positions, city_coordinates, intensity_threshold):
@@ -178,3 +184,25 @@ def is_coverage_acceptable(satellite_positions, city_coordinates, cities_weights
     covered_population = np.sum(cities_weights * acceptable_intensity)
     coverage_percentage = (covered_population / total_population) * 100
     return coverage_percentage >= 80
+
+#fonction objectif pour minimiser la distance totale entre les satellites et les villes
+
+
+
+#créé une sphère qui représente la terre de rayon r
+def create_earth(r):
+    u = np.linspace(0, 2 * np.pi, 100)
+    v = np.linspace(0, np.pi, 100)
+    x = r * np.outer(np.cos(u), np.sin(v))
+    y = r * np.outer(np.sin(u), np.sin(v))
+    z = r * np.outer(np.ones(np.size(u)), np.cos(v))
+    return x, y, z
+#fonction qui calcule le pourcentage de couverture pour une intensité donnée sur une sphere d'un rayon donné
+def coverage_percentage_on_sphere(satellite_positions, city_coordinates, cities_weights, intensity_threshold, r):
+    acceptable_intensity = is_intensity_acceptable(satellite_positions, city_coordinates, intensity_threshold)
+    total_population = np.sum(cities_weights)
+    covered_population = np.sum(cities_weights * acceptable_intensity)
+    coverage_percentage = (covered_population / total_population) * 100
+    return coverage_percentage
+
+#solveur pour minimiser la distance totale entre les satellites et les villes 
