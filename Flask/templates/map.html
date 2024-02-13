@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Carte Interactive</title>
+    <!-- Inclure les bibliothèques Folium et Leaflet (si nécessaire) -->
+</head>
+<body>
+    <div id="mapid" style="width: 800px; height: 500px;"></div>
+    <button id="resetButton">Réinitialiser les Satellites</button>
+
+
+    <script>
+        // Code pour initialiser et afficher la carte
+        var map = L.map('mapid').setView([20, 0], 2);  // Utilisez vos propres paramètres de vue de carte ici
+
+        // Fonction pour gérer l'ajout de marqueurs satellites
+        function addSatelliteMarker(lat, lng) {
+            L.marker([lat, lng], {icon: L.icon({iconUrl: 'path_to_satellite_icon.png'})}) // Assurez-vous d'avoir une icône pour le marqueur
+                .addTo(map);
+        }
+
+        // Gestionnaire d'événements pour un clic sur la carte
+        function onMapClick(e) {
+            addSatelliteMarker(e.latlng.lat, e.latlng.lng);
+
+            // Envoi de la position du nouveau satellite au serveur
+            fetch('/add_satellite', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newSatellite)
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Code pour ajouter le marqueur du satellite sur la carte
+                // ...
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+
+        // Ajout de l'écouteur d'événements
+        map.on('click', onMapClick);
+
+        document.getElementById('resetButton').addEventListener('click', function() {
+    // Supprimer tous les marqueurs de la carte
+    // Cette méthode dépend de la façon dont vous stockez et gérez les marqueurs.
+    // Si vous utilisez un groupe de calques pour les marqueurs, vous pouvez faire quelque chose comme :
+    if (window.satelliteLayer) {
+        window.satelliteLayer.clearLayers();
+    }
+
+    // Optionnellement, envoyer une requête au serveur pour réinitialiser la liste des satellites
+    fetch('/reset_satellites', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data.message);
+        // Vous pouvez également ajouter ici un code pour gérer la réponse du serveur
+    })
+    .catch((error) => {
+        console.error('Erreur:', error);
+    });
+});
+
+    </script>
+</body>
+</html>
