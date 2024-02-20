@@ -97,16 +97,6 @@ def mapview():
     return m._repr_html_()
 #fichier pour créer une app interactive avec Flask
 
-@app.route('/add_satellite', methods=['POST'])
-def add_satellite():
-    data = request.json
-    lat = data['lat']
-    lng = data['lng']
-    
-    # Traitement des données (par exemple, ajouter les coordonnées à une base de données ou à une liste)
-
-    return jsonify({"message": "Satellite ajouté avec succès", "lat": lat, "lng": lng})
-    
 
 
 @app.route('/')
