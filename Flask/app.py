@@ -42,20 +42,12 @@ def create_map_with_cities_folium():
     ).add_to(m)
 
 
-    # couches
-    cities_layer = folium.FeatureGroup(name='Villes')
     satellites_layer = folium.FeatureGroup(name='Satellites')
     coverage_layer = folium.FeatureGroup(name='Zones de couverture')
 
 
-    # Coordonnées des villes, j'en ai générées au pif pour l'exemple
-    cities = {
-        "Tokyo": (35.6895, 139.6917),
-        "Delhi": (28.7041, 77.1025),
-        "Shanghai": (31.2304, 121.4737),
-        "Sao Paulo": (-23.5505, -46.6333),
-        "Mumbai": (19.0760, 72.8777)
-    }
+    # Coordonnées des villes
+    
 
     # Coordonnées des satellites, pareil au pif pour l'exemple
     satellites = {
@@ -67,17 +59,12 @@ def create_map_with_cities_folium():
     # Rayon de portée des satellites (en km)
     radius = 2000 * 1000
 
-    # Ajouter des marqueurs pour les villes
-    for city, (lat, lon) in cities.items():
-        folium.Marker([lat, lon], popup=city).add_to(cities_layer)
-
     # Ajouter des marqueurs et des cercles (portées) pour les satellites
     for satellite, (lat, lon) in satellites.items():
         folium.Marker([lat, lon], icon=folium.Icon(color='blue'), popup=satellite).add_to(satellites_layer)
         folium.Circle([lat, lon], radius, color='blue', fill=True, fill_opacity=0.3).add_to(coverage_layer)
 
     # Ajouter les groupes de couches à la carte
-    cities_layer.add_to(m)
     satellites_layer.add_to(m)
     coverage_layer.add_to(m)
 

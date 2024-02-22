@@ -22,7 +22,7 @@ def main():
     def placer_point(event, canvas, nombre_points, label_info):
         if nombre_points[0] > 0:
         # Dessine un point à l'emplacement du clic
-            rayon = 5
+            rayon = 45
             canvas.create_oval(event.x - rayon, event.y - rayon, event.x + rayon, event.y + rayon, fill='blue')
             nombre_points[0] -= 1
             label_info.config(text=f"Points restants à placer : {nombre_points[0]}")
@@ -104,9 +104,6 @@ def lancer_application_tkinter():
 
     # Exécuter la boucle principale
     window.mainloop()
-
-
-
 
 if __name__ == "__main__":
     main()
