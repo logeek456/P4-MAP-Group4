@@ -50,11 +50,47 @@ function loadCustomScript(mymap) {
         var position2 = draggableMarker2.getLatLng();
         circle2.setLatLng(position2);
         alert("Nouvelle position 2 : " + position2.lat + ", " + position2.lng);
+        fetch('/calculer_pourcentage', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({lat: position2.lat, lng: position2.lng})
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Mettre à jour l'information sur la carte avec le pourcentage reçu
+            var infoDiv = document.querySelector('.infoSurPopu');
+            if (infoDiv) {
+                infoDiv.innerHTML = 'Pourcentage de la population couverte : ' + data.pourcentage + '%';
+            }
+        })
+        .catch(error => {
+            console.error('Erreur lors de la requête AJAX :', error);
+        });
     });
     draggableMarker3.on('dragend', function(e) {
         var position3 = draggableMarker3.getLatLng();
         circle3.setLatLng(position3);
         alert("Nouvelle position 3 : " + position3.lat + ", " + position3.lng);
+        fetch('/calculer_pourcentage', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({lat: position3.lat, lng: position3.lng})
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Mettre à jour l'information sur la carte avec le pourcentage reçu
+            var infoDiv = document.querySelector('.infoSurPopu');
+            if (infoDiv) {
+                infoDiv.innerHTML = 'Pourcentage de la population couverte : ' + data.pourcentage + '%';
+            }
+        })
+        .catch(error => {
+            console.error('Erreur lors de la requête AJAX :', error);
+        });
     });
 
 
