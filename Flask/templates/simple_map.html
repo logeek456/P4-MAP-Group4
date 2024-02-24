@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Carte Leaflet Simple</title>
+    <title>Debut de la carte interactive</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -18,12 +18,19 @@
     <div id="mapid" style="width: 1350px; height: 700px;"></div>
 
     <script>
-        var mymap = L.map('mapid').setView([51.505, -0.09], 13);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 25
-        }).addTo(mymap);
+        function initializeMapAndScript() {
+            var mymap = L.map('mapid').setView([51.505, -2.09], 13);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 25
+            }).addTo(mymap);
+            loadCustomScript(mymap); // Assurez-vous de passer `mymap` en argument
+        }
 
-        loadCustomScript();
+        // Exécutez la fonction une fois que la page est entièrement chargée
+        window.onload = initializeMapAndScript;
     </script>
+
+    <!-- Inclure votre fichier JavaScript personnalisé après la définition de la fonction -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
