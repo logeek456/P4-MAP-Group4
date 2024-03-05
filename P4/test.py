@@ -55,8 +55,31 @@ grid_scalar = pv.grid_from_sph_coords(xx_bounds, yy_bounds, levels)
 # And fill its cell arrays with the scalar data
 grid_scalar.cell_data["example"] = np.array(scalar).swapaxes(-2, -1).ravel("C")
 
+Hs = RADIUS
+
+def add_cities(phi, theta, p) : 
+    x_points = RADIUS * np.sin(phi) * np.cos(theta)
+    y_points = RADIUS * np.sin(phi) * np.sin(theta)
+    z_points = RADIUS * np.cos(phi)
+    for i in range(len(x_points)):
+        p.add_mesh(pv.Sphere(radius=0.02, center=[x_points[i], y_points[i], z_points[i]]))
+
+
+def add_satellites(phi, theta, p) : 
+    x_points = (RADIUS+Hs) * np.sin(phi) * np.cos(theta)
+    y_points = (RADIUS+Hs) * np.sin(phi) * np.sin(theta)
+    z_points = (RADIUS+Hs) * np.cos(phi)
+    for i in range(len(x_points)):
+        p.add_mesh(pv.Sphere(radius=0.02, center=[x_points[i], y_points[i], z_points[i]]))
+
+    
+
+
+
+
 # Make a plot
 p = pv.Plotter()
 p.add_mesh(pv.Sphere(radius=RADIUS))
 p.add_mesh(grid_scalar, clim=[-1, 1], opacity=0.5, cmap="plasma")
 p.show()
+
