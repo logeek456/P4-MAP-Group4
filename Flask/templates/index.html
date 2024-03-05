@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sphère Interactive</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <img id="sphereImage" src="" alt="Image de la sphère"/>
+    <script>
+        function updateSphere(lat, lng) {
+            $.ajax({
+                url: '/get_sphere_image',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({"lat": lat, "lng": lng}),
+                success: function(response) {
+                    $('#sphereImage').attr('src', 'data:image/png;base64,' + response.image);
+                }
+            });
+        }
+
+        // Exemple d'appel
+        updateSphere(45, 90); // Mettre à jour avec les vraies coordonnées
+    </script>
+</body>
+</html>
