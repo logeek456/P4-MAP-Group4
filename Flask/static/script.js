@@ -1,6 +1,6 @@
 function loadCustomScript(mymap) {
-    var draggableMarker = L.marker([51.505, -2.09], {draggable: true}).addTo(mymap);
-    var circle = L.circle([51.505, -2.09], {
+    var draggableMarker = L.marker([50.67183453379191, 4.609907269477845], {draggable: true}).addTo(mymap);
+    var circle = L.circle([50.67183453379191, 4.609907269477845], {
         color: 'green', // Couleur du bord du cercle
     fillColor: '#90EE90',
         fillOpacity: 0.5,
@@ -59,7 +59,6 @@ function loadCustomScript(mymap) {
         })
         .then(response => response.json())
         .then(data => {
-            // Mettre à jour l'information sur la carte avec le pourcentage reçu
             var infoDiv = document.querySelector('.infoSurPopu');
             if (infoDiv) {
                 infoDiv.innerHTML = 'Pourcentage de la population couverte : ' + data.pourcentage + '%';
@@ -82,7 +81,6 @@ function loadCustomScript(mymap) {
         })
         .then(response => response.json())
         .then(data => {
-            // Mettre à jour l'information sur la carte avec le pourcentage reçu
             var infoDiv = document.querySelector('.infoSurPopu');
             if (infoDiv) {
                 infoDiv.innerHTML = 'Pourcentage de la population couverte : ' + data.pourcentage + '%';
@@ -92,8 +90,6 @@ function loadCustomScript(mymap) {
             console.error('Erreur lors de la requête AJAX :', error);
         });
     });
-
-
     var infoSurPopu = L.control({position: 'topright'});
     infoSurPopu.onAdd = function (mymap) {
         var div = L.DomUtil.create('div', 'infoSurPopu');

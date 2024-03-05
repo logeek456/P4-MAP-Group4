@@ -4,7 +4,6 @@ import folium, plotly
 app = Flask(__name__)
 
 def calculer_pourcentage(lat, lng):
-    # Votre logique de calcul ici
     return 1.6*lat
 
 

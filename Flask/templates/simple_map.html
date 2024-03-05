@@ -4,14 +4,10 @@
     <title>Debut de la carte interactive</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Inclure Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
 
-    <!-- Inclure Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 
-    <!-- Inclure votre fichier JavaScript personnalisé -->
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </head>
 <body>
@@ -19,14 +15,14 @@
 
     <script>
         function initializeMapAndScript() {
-            var mymap = L.map('mapid').setView([51.505, -2.09], 13);
+            var mymap = L.map('mapid').setView([50.67183453379191, 4.609907269477845], 13);
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 25
             }).addTo(mymap);
-            loadCustomScript(mymap); // Assurez-vous de passer `mymap` en argument
+            loadCustomScript(mymap); 
         }
 
-        // Exécutez la fonction une fois que la page est entièrement chargée
+        
         window.onload = initializeMapAndScript;
     </script>
 
