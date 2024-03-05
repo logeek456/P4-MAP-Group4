@@ -1,5 +1,4 @@
 from flask import Flask, redirect, render_template, url_for, request, jsonify
-import folium, plotly 
 
 app = Flask(__name__)
 

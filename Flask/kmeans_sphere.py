@@ -38,7 +38,7 @@ X = np.random.normal(size=(100, 3))
 X /= np.linalg.norm(X, axis=1)[:, np.newaxis]
 
 # Application du K-means sphérique
-labels, centers = spherical_kmeans(X, n_clusters=6)
+labels, centers = spherical_kmeans(X, n_clusters=4)
 
 # Création de la figure 3D
 fig = plt.figure(figsize=(8, 6))
@@ -48,7 +48,7 @@ ax = fig.add_subplot(111, projection='3d')
 colors = ['b', 'g', 'r', 'c', 'm', 'y', 'k']
 
 # Tracer les points
-for i in range(6):#n_clusters
+for i in range(4):#n_clusters
     ax.scatter(X[labels == i, 0], X[labels == i, 1], X[labels == i, 2], c=colors[i], label=f'Cluster {i+1}')
 
 # Tracer les centres des clusters
