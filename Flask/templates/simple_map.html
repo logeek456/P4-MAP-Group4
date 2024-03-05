@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debut de la carte interactive</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body>
+    <div id="mapid" style="width: 1350px; height: 700px;"></div>
+
+    <script>
+        function initializeMapAndScript() {
+            var mymap = L.map('mapid').setView([50.67183453379191, 4.609907269477845], 13);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 25
+            }).addTo(mymap);
+            loadCustomScript(mymap); 
+
+            // Redimensionner la map en fonction de la taille de la fenêtre du navigateur
+            function resizeMap() {
+            var mapid = document.getElementById('mapid');
+            mapid.style.width = window.innerWidth + 'px';
+            mapid.style.height = window.innerHeight + 'px';
+            mymap.invalidateSize();
+            }
+
+            // Redimensionner la map lorsque la fenêtre du navigateur est redimensionnée
+            window.addEventListener('resize', resizeMap);
+            
+            // Redimensionner la map au chargement de la page
+            SresizeMap();
+        }
+
+        
+        window.onload = initializeMapAndScript;
+    </script>
+
+    <!-- Inclure votre fichier JavaScript personnalisé après la définition de la fonction -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
