@@ -26,33 +26,39 @@ def auto_sphere(image_file):
     sphere_actor = tvtk.Actor(mapper=sphere_mapper, texture=texture)
     fig.scene.add_actor(sphere_actor)
 
-
-auto_sphere('earth.jpg')
-mlab.show()
-
+def plot_cities(population, coords):
+    pass
 
 
-# Generate a sphere representing the Earth
-r = 6371  # Earth's radius in kilometers
-theta, phi = np.mgrid[0:2*np.pi:100j, 0:np.pi:50j]
-x = r*np.sin(phi)*np.cos(theta)
-y = r*np.sin(phi)*np.sin(theta)
-z = r*np.cos(phi)
+if __name__ == "__main__":
+    auto_sphere('earth.jpg')
+    # Spherical coordinates
+    theta = np.pi / 4  # angle from the z-axis
+    phi = np.pi / 4  # angle from the x-axis in the xy-plane
 
-# Load topography data (you can use your own data)
-topo = np.loadtxt('topography_data.txt')
+    # Radius of the sphere
+    R = 1
 
-# Plot Earth's surface
-surface = mlab.mesh(x, y, z, scalars=topo, colormap='gist_earth')
+    # Cartesian coordinates
+    x = R * np.sin(theta) * np.cos(phi)
+    y = R * np.sin(theta) * np.sin(phi)
+    z = R * np.cos(theta)
 
-# Add a nice color bar
-mlab.colorbar(surface, orientation='vertical')
+    # Plot the point
+    mlab.points3d(x, y, z, color=(1, 0, 0), scale_factor=0.05)
 
-# Add labels and title
-mlab.xlabel('X')
-mlab.ylabel('Y')
-mlab.zlabel('Z')
-mlab.title('Planet Earth')
+    # Radius
+    R_above = 1.2
 
-# Show plot
-mlab.show()
+    # Cartesian coordinates
+    x_above = R_above * np.sin(theta) * np.cos(phi)
+    y_above = R_above * np.sin(theta) * np.sin(phi)
+    z_above = R_above * np.cos(theta)
+
+    # Plot the point
+    mlab.points3d(x_above, y_above, z_above, color=(0, 1, 0), scale_factor=0.05)
+
+    mlab.show()
+
+
+
