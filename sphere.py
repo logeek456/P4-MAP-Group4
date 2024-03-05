@@ -14,7 +14,7 @@ def auto_sphere(image_file):
     # (interpolate for a less raster appearance when zoomed in)
 
     # use a TexturedSphereSource, a.k.a. getting our hands dirty
-    R = 1
+    R = 1.5
     Nrad = 180
 
     # create the sphere source with a given radius and angular resolution
@@ -27,11 +27,23 @@ def auto_sphere(image_file):
     fig.scene.add_actor(sphere_actor)
 
 def plot_cities(population, coords):
-    pass
+    # Create a sphere
+    auto_sphere('earth.jpg')
+
+    # Plot the cities
+    
+    mlab.points3d(coords[:, 0], coords[:,1], coords[:,2], population, scale_factor=0.05)
+
+    # Show the plot
+    mlab.show()
+    
 
 
 if __name__ == "__main__":
-    auto_sphere('earth.jpg')
+    """ auto_sphere('earth.jpg')
+    coords = []
+    for i in range(5):
+        coords.append([np.random.uniform(0, np.pi), np.random.uniform(0, 2*np.pi), 1])
     # Spherical coordinates
     theta = np.pi / 4  # angle from the z-axis
     phi = np.pi / 4  # angle from the x-axis in the xy-plane
@@ -45,7 +57,7 @@ if __name__ == "__main__":
     z = R * np.cos(theta)
 
     # Plot the point
-    mlab.points3d(x, y, z, color=(1, 0, 0), scale_factor=0.05)
+    #mlab.points3d(x, y, z, color=(1, 0, 0), scale_factor=0.05)
 
     # Radius
     R_above = 1.2
@@ -56,9 +68,19 @@ if __name__ == "__main__":
     z_above = R_above * np.cos(theta)
 
     # Plot the point
-    mlab.points3d(x_above, y_above, z_above, color=(0, 1, 0), scale_factor=0.05)
+    #mlab.points3d(x_above, y_above, z_above, color=(0, 1, 0), scale_factor=0.05)"""
+    population = np.array([1, 2, 3, 4, 5])
+    #Generate coordinates for 5 cities across the sphere
+    coords = []
+    for i in range(5):
+        theta = np.random.uniform(0, np.pi)
+        phi = np.random.uniform(0, 2*np.pi)
+        coords.append( [np.sin(theta) * np.cos(phi), np.sin(theta) * np.sin(phi), np.cos(np.pi/4)])
+    coords = np.array(coords)
+    polar_coords = np.array([[0, 0, 1], [np.pi/4, 1.5*np.pi/4, 1], [np.pi/2, np.pi/2, 1], [3*np.pi/4, 3*np.pi/4, 1], [np.pi, np.pi, 1]])
+    plot_cities(population, coords)
 
-    mlab.show()
+    #mlab.show()
 
 
 
