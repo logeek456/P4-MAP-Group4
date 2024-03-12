@@ -1,0 +1,257 @@
+
+\documentclass[a4paper]{article}
+\usepackage[a4paper,left=3cm,right=3cm,top=3cm,bottom=3cm]{geometry}
+\usepackage{mwe}
+\usepackage{lipsum}
+\usepackage{enumitem}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage{graphicx}
+\usepackage{gensymb}
+\usepackage{amsmath}
+\usepackage{comment}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{caption}
+\usepackage{envmath}
+\usepackage{float}
+\pagestyle{fancy}
+\usepackage{libertine}
+\usepackage[pdftex]{graphicx}
+\usepackage{appendix}
+\usepackage{epsfig}
+\usepackage{tikz}
+\usepackage{multirow}
+\usetikzlibrary{fit,positioning} 
+\usetikzlibrary{arrows.meta}
+\tikzset{%
+  >={Latex[width=2mm,length=2mm]},
+  % Specifications for style of nodes:
+            base/.style = {rectangle, rounded corners, draw=black,
+                           minimum width=4cm, minimum height=1cm,
+                           text centered, font=\sffamily},
+  activityStarts/.style = {base, fill=blue!30},
+       startstop/.style = {base, fill=red!30},
+    activityRuns/.style = {base, fill=green!30},
+         process/.style = {base, minimum width=2.5cm, fill=orange!15,
+                           font=\ttfamily},
+}
+
+\usepackage{enumitem}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+\usepackage{xcolor}
+\usepackage{listings}
+
+\usepackage[]{minted}
+
+\lstset{%
+  language=Python,
+  basicstyle   = \ttfamily,
+  keywordstyle =    \color{magenta},
+  keywordstyle = [2]\color{orange},
+  commentstyle =    \color{gray}\itshape,
+  stringstyle  =    \color{cyan},
+  numbers      = left,
+  frame        = single,
+  framesep     = 2pt,
+  aboveskip    = 1ex
+}
+
+\renewcommand{\headrulewidth}{1pt}
+\setlength{\parindent}{0cm}
+\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
+\newcommand{\hsp}{\hspace{20pt}}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+\begin{document}
+
+\begin{titlepage}
+  \begin{sffamily}
+  \begin{center}
+
+    \textsc{\LARGE UCL}\\[0.6 cm]
+
+    \HRule \\[0.4cm]
+    { \huge \bfseries LEPL1507 : Rapport 2, modèle rectangulaire\\[0.4cm] }
+    \HRule \\[1 cm]
+
+    \begin{minipage}{0.4\textwidth}
+      \begin{flushleft} \large
+        \textsc{Tom Janssen : 48912100}\\
+        \textsc{Adam Mesbahi : 58642100}\\
+        \textsc{Pablo Ferreras Alloin : 68082100}\\
+        \textsc{Loïc Kayitakire : 53272100}\\
+        \textsc{Alexandre Sosson : 57182100}\\
+
+      \end{flushleft}
+    \end{minipage}
+    \begin{minipage}{0.4\textwidth}
+      \begin{flushright} \large
+        \textsc{Groupe 4}\\ 
+      \end{flushright}
+    \end{minipage}
+
+    \vfill
+
+
+    {\large{} 12 mars 2024}
+
+  \end{center}
+  \end{sffamily}
+\end{titlepage}
+
+
+\fancyhead[L]{LEPL1507}
+\fancyhead[C]{\textbf{Rapport 2}}
+\fancyhead[R]{Groupe 4}
+
+\section{Introduction et contexte}
+Un groupe international de coopération a décidé de créer un réseau Internet mondial. Pour ce faire, le groupe a décidé de faire un appel à projet auquel nous participons. 
+% qui répartit les satellites autour d'une sphère pour fournir une connexion suffisamment bonne au plus grand nombre de personnes. 
+Notre but est de créer un modèle répartissant les satellites autour de la Terre afin de fournir la meilleure connexion possible au plus grand nombre de personnes. Nous aurons dans un deuxième temps d'autres buts d'optimisation tels que la minimisation du coût, la réduction de l'impact écologique, la prise en compte des interdictions de survol dans certaines zones, etc.
+
+Dans ce rapport, nous évaluons notre avancement sur l'objectif principal et établissons un premier cahier des charges.
+
+\section{Objectifs du modèle}
+
+\section{Cahier des charges}
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+Contraintes & Minimum & Typique & Maximum & Résultat \\
+\hline
+Temps & N/A & 10 sec & 3600 sec &  \\
+\hline
+Couverture de population & 80\% & 95\% & 100\% &  \\
+\hline
+Couverture au sol & 70\% &  & 100\% &  \\
+\hline
+Géométrie & Sphère & Sphère & Toute forme possible & \\
+\hline
+\end{tabular}
+\caption{Cahier des charges}
+\label{tab:my_table}
+\end{table}
+
+\section{Analyse réflexive}
+
+Au cours de cette première partie de projet, notre groupe a dû faire face à plusieurs défis, notamment en ce qui concerne notre modélisation et nos hypothèses initiales. On a dans cette partie du projet considéré la Terre comme un rectangle afin de simplifier. Nous avons commencé par un modèle très simple en ne considérant qu'un nombre très restreint de villes afin d'optimiser notre code. Une fois ce modèle abouti, nous avons augmenté petit à petit le nombre de villes afin de voir si notre modèle était toujours efficace. Enfin, nous sommes passés à un modèle de Terre plate. 
+Seulement cette hypothèse (qu'on sait fausse de nos jours) rend notre modèle beaucoup moins fiable pour une application pratique.\\
+Nous avons eu comme idée de développer une interface interactive afin de rendre la visualisation de l'application en temps réel. Cette interface permettrait aux utilisateurs de voir l'efficacité des placements choisis par notre algorithme. Cependant, nous avons été confronté à plusieurs soucis pour la mise en place de cette interface. Tout d'abord, la création d'une telle visualisation demande de coder en javascript et html, deux langages inconnus pour l'ensemble du groupe. Le temps a été la plus grosse contrainte car cet apprentissage demande du temps, mais nous espérons avoir une implémentation fonctionnelle pour le prochain rapport. 
+\\
+%Dire qu'on a utilisé plusieurs solveurs, enveloppe connexe.
+
+
+
+%Manque l'enveloppe convexe
+
+Ayant un problème non-convexe, nous avons décidé d'explorer plusieurs options pour le rendre convexe. L'une de ces idées a été de trouver l'enveloppe convexe de notre fonction objectif. L'enveloppe convexe d'une fonction est la courbe maximale convexe se trouvant sous la courbe de cette fonction. Cela nous permet donc d'avoir une fonction convexe sans pour autant changer notre minimum global. Nous avons cependant décidé de laisser cette idée de côté car calculer l'enveloppe d'une fonction est très compliqué sans évaluer la fonction, ce que nous ne pouvons évidemment pas faire car ce serait trop couteux et que le processus perdrait tout son sens puisque nous n'aurions qu'à garder la plus petite valeur évaluée.
+
+Pour le lancement du problème, nous avons créé une fonction utilisant KMeans pour avoir une première répartition des satellites
+
+
+
+\section{Description du modèle}
+
+\subsection{Hypothèses}
+Pour cette version du modèle, nous avons émis quelques hypothèses pour le simplifier :
+
+\begin{itemize}
+
+    \item Une hauteur de satellites fixe et constante, maintenue en toute situation.
+    \item La position au-dessus d'un point est maintenue, même pour des hauteurs non géostationnaires.
+    \item Chaque satellite émet des ondes à des fréquences différentes, évitant des problèmes d'interférences.
+    \item On suppose que l'intensité est constante sur la surface de la sphère.
+    \item Tous les satellites ont la même puissance.
+\end{itemize} 
+
+\subsection{Données et choix des paramètres}
+Les données qui sont fournies à notre algorithme sont :
+\begin{itemize}
+    \item Le nombre $n_S$ de satellites à répartir
+    \item Les nombres $n_V$ et $n_P$ de villes et points à recouvrir
+    \item Les populations $p_J$ des villes 
+    \item La puissance $I_S$ des satellites
+    \item La puissance $I_{min}$ minimale requise
+\end{itemize}
+\\
+Nous devons donc choisir ces paramètres. Nous avons cherché un dataset de villes et leur population permettant de lier au mieux précision et temps de calcul. Nous avons aussi fait des recherches quant à la puissance des satellites et à l'intensité minimale que nécessite une personne. Nous avonns décidé que cette intensité minimale était par personne et devait donc être multipliée par le nombre d'habitants de la ville pour avoir l'intensité minimale de celle-ci car nous voulons que dans le cas où tous les utilisateurs utiliseraient leur connexion en même temps, ils pourraient quand-même profiter d'un réseau confortable.
+
+
+\subsection{Variables}
+Les variables de notre modèle correspondent aux positions des satellites dans le plan (étant donné que la hauteur est fixe pour l'instant).
+
+On a donc, pour chaque satellite $i$, des coordonnées $(x_{i},y_{i})$, avec $i \in \{1, 2, \ldots, n_S\}$
+
+De plus, pour chaque point de l'espace, on a une variable d'acceptabilité $A_k$ qui est binaire, avec $k \in \{1,2,\ldots,n_P\}$
+
+
+\subsection{Fonction objectif}
+
+Dans notre fonction objectif, nous cherchons à maximiser l'intensité totale émise dans les villes. Nous avons donc :
+
+$$max \sum_{i=1}^{n_S} \sum_{j=1}^{n_V} \frac{I_S}{d_{ij}^2}  $$
+
+
+\subsection{Contraintes}
+Une de nos contraintes est de couvrir un certain pourcentage du sol. De cette façon, les villages et les routes pourront aussi être couvertes de réseau. Elle est formulée à travers 3 contraintes :
+$$ A_k \leq \sum_{i=1}^{n_S} \frac{I_S}{d_{ik}^2} , \forall k \in \{1,2,\ldots, n_P\}$$
+\\
+$$ \frac{\sum_{k=1}^{n_P} A_k}{\sum_{k=1}^{n_P} 1} \geq 0.7$$ 
+\\
+$$ A_k \in \{0,1\}$$
+\\
+L'autre est de s'assurer qu'au moins 80\% de la population dans les villes soit couverte. Celle-ci est formulée comme :
+
+$$ \frac{\sum_{j=1}^{n_V} \sum_{i=1}^{n_S} \frac{I_S}{d_{ij}^2} p_j}{\sum_{j=1}^{n_V} p_j} \geq 0.8 $$
+
+\subsection{Solveur}
+Pour arriver à une solution, nous avons dû tester plusieurs solveurs, certains n'étant pas compatibles avec les contraintes, d'autres étant restreints à certains types de modèles.
+
+Finalement, nous nous sommes décidés à utiliser COBYLA. Celui-ci résout le problème en linéarisant la fonction objectif ainsi que les contraintes, puis résolvant ce nouveau problème.
+Ce solveur nous semblait adapté à ce premier modèle, qui est très simplifié.
+\section{Limites du modèle}
+Tout d'abord le modèle est réalisé sur un rectangle et donc les formes sur lesquelles notre modèle est applicable sont très limitées. 
+Notre modèle étant non-convexe, une autre des limitations du modèle est qu'on ne sait pas si la solution est locale ou globale. 
+Ensuite, il y a beaucoup d'hypothèses non-réalistes qui ont été posées, tel qu'une intensité constante sur le plan. 
+
+Ainsi, ce modèle est (pour l'instant) plus utile pour vérifier la cohérence des contraintes posées et de la fonction objectif, ou pour avoir une indication d'une disposition initiale possible.
+
+\section{Performances}
+Pour ce premier rapport et donc notre modèle très simplifié, nos tests de performance n'étaient pas très pertinents et nous avons décidé de ne pas en parler pour le moment. Nous n'avons pas pu travaillé autant que nous le souhaitions sur cette première partie du projet. 
+
+\section{Résultats et conclusion}
+Nous avons réalisé un test avec 4 villes, 3 satellites, et une fonction objectif nulle, pour s'assurer que le solveur applique les contraintes. Voici ce que l'on obtient : 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{heatmap_3_sat_4_vil.png}
+    \caption{Carte montrant la zone couverte par les satellites.}
+    \label{fig1}
+\end{figure}
+Les triangles représentent les 3 satellites, tandis que le point violet au centre en $(0.5,0.5)$, le point jaune en $(0,1)$, et les points violet sombre en $(0,0)$ et $(1,1)$ représentent les villes. Ici $I_{min} = 1$, et $I_S = 50$. Les valeurs varient entre 200 et 1500 à cause du fait qu'on divise par la distance au carré, et que celle-ci est en général plus petite que 1, car on est dans un carré de taille 1 x 1. 
+L'intensité minimale au sol a été posée comme 600. On peut voir qu'il y a effectivement une bonne partie de la carte couverte correctement. De plus, les satellites sont plus proches des grosses villes (les points plus grands désignent des villes plus peuplées), i.e. les points en $(0.5,0.5)$ et en $(0,1)$.
+ 
+\newpage
+
+\section{Bibliographie}
+
+\begin{thebibliography}{9}
+\bibitem{source1}
+Author 1, Title of the Source, Publisher, Year.
+
+\bibitem{source2}
+Author 2, Title of the Source, Journal, Volume, Pages, Year.
+
+% Add more sources here
+
+\end{thebibliography}
+
+
+
+\end{document}
