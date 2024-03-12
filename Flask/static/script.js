@@ -42,7 +42,7 @@ function loadCustomScript(mymap) {
     draggableMarker.on('dragend', function(e) {
         var position = draggableMarker.getLatLng();
         circle.setLatLng(position);
-        alert("Nouvelle position : " + position.lat + ", " + position.lng);
+        //alert("Nouvelle position : " + position.lat + ", " + position.lng);
         fetch('/calculer_pourcentage', {
             method: 'POST',
             headers: {
@@ -65,7 +65,7 @@ function loadCustomScript(mymap) {
     draggableMarker2.on('dragend', function(e) {
         var position2 = draggableMarker2.getLatLng();
         circle2.setLatLng(position2);
-        alert("Nouvelle position 2 : " + position2.lat + ", " + position2.lng);
+        //alert("Nouvelle position 2 : " + position2.lat + ", " + position2.lng);
         fetch('/calculer_pourcentage', {
             method: 'POST',
             headers: {
@@ -87,7 +87,7 @@ function loadCustomScript(mymap) {
     draggableMarker3.on('dragend', function(e) {
         var position3 = draggableMarker3.getLatLng();
         circle3.setLatLng(position3);
-        alert("Nouvelle position 3 : " + position3.lat + ", " + position3.lng);
+        //alert("Nouvelle position 3 : " + position3.lat + ", " + position3.lng);
         fetch('/calculer_pourcentage', {
             method: 'POST',
             headers: {
@@ -110,7 +110,7 @@ function loadCustomScript(mymap) {
     draggableMarker4.on('dragend', function(e) {
         var position4 = draggableMarker4.getLatLng();
         circle3.setLatLng(position4);
-        alert("Nouvelle position 4 : " + position4.lat + ", " + position4.lng);
+        //alert("Nouvelle position 4 : " + position4.lat + ", " + position4.lng);
         fetch('/calculer_pourcentage', {
             method: 'POST',
             headers: {
