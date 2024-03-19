@@ -58,6 +58,7 @@ kmeans = KMeans(n_clusters=n_clusters, max_iters=1000, distance="SPHERICAL")
 
 kmeans.fit(P)
 y_kmeans = kmeans.predict(P)
+print("Number of cities : ", len(P))
 
 
 
