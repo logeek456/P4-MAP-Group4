@@ -19,6 +19,7 @@ def run_function():
     # Appel de votre fonction avec les paramètres choisis
     result = function(selected_param1, selected_param2)
     # Affichage du résultat dans une boîte de dialogue
+    
     messagebox.showinfo("Résultat", f"Le résultat est : {result}")
 
 
@@ -132,7 +133,7 @@ def function(name, use_kmeans):
             dij_sq = distance_sq(planet_radius, planet_radius+Hs, phi, resultat.x[2*i], theta, resultat.x[2*i+1]) 
             somme += Is/(dij_sq)
         return somme
-    """
+    
     mySphere = display.Sphere("Adam", planet_radius, [0, 0, 0], f)
 
     for i in range(len(P)) : 
@@ -142,9 +143,9 @@ def function(name, use_kmeans):
         else : c = 'red'
         mySphere.add_cities(P[i][0], P[i][1], c)
     for i in range(N) : 
-        mySphere.add_satellites(resultat.x[2*i], resultat.x[2*i+1], "black", mySphere.radius)
-    """
-    #mySphere.show()
+        mySphere.add_satellites(resultat.x[2*i], resultat.x[2*i+1], "white", mySphere.radius)
+    
+    mySphere.show()
     return  contrainte1(resultat.x) 
 
 
@@ -217,7 +218,16 @@ def plot_performance_comparison():
     plt.xticks(execution_indices)
     plt.legend()
     plt.grid(True)
-    
+
+
+
+def adjust_font(event):
+    # This function adjusts the font size based on window size
+    font_size = max(10, int(root.winfo_width() / 20))  # Adjust 40 to your preference
+    run_button.config(font=("Helvetica", font_size))
+
+
+
 if __name__ == "__main__":
     #plot_result()
     #plot_time()
@@ -227,7 +237,9 @@ if __name__ == "__main__":
     # Création de la fenêtre principal
     root = tk.Tk()
     root.title("Interface pour choisir les paramètres")
-    root.geometry("400x200") 
+    root.geometry("500x500") 
+    root.configure(bg="lightblue")
+    root.bind("<Configure>", adjust_font)
 
     # Options pour les paramètres
     param1_options = ["COBYLA", "trust-constr"]
@@ -236,24 +248,30 @@ if __name__ == "__main__":
     # Variables pour stocker les choix des utilisateurs 
     param1_var = tk.StringVar(root)
     param1_var.set(param1_options[0])  # Valeur par défaut
+    
 
-    param2_var = tk.StringVar(root)
-    param2_var.set(param2_options[0])  # Valeur par défaut
+    param2_var = tk.BooleanVar(root)
+
 
     # Création des menus déroulants pour les paramètres
+    param1_label = tk.Label(root, text="Choix du solveur:", anchor="w")
+    param1_label.grid(row=0, column=0, sticky="w")
+    
     param1_menu = tk.OptionMenu(root, param1_var, *param1_options)
-    param1_label = tk.Label(root, text="Paramètre 1 :")
-    param1_label.grid(row=0, column=0)
-    param1_menu.grid(row=0, column=1)
+    param1_menu.grid(row=0, column=1, sticky="ew", padx=10, pady=5)
 
-    param2_menu = tk.OptionMenu(root, param2_var, *param2_options)
-    param2_label = tk.Label(root, text="Paramètre 2 :")
-    param2_label.grid(row=1, column=0)
-    param2_menu.grid(row=1, column=1)
+    param2_label = tk.Label(root, text="KMeans:", anchor="w")
+    param2_label.grid(row=1, column=0, sticky="w")
+    
+    param2_toggle = tk.Checkbutton(root, variable=param2_var)
+    param2_toggle.grid(row=1, column=1, sticky="ew", padx=10, pady=5)
 
     # Bouton pour exécuter la fonction avec les paramètres choisis
-    run_button = tk.Button(root, text="Exécuter", command=run_function)
-    run_button.grid(row=2, columnspan=2)
+    button_frame = tk.Frame(root, bg="lightblue")
+    button_frame.grid(row=4, column=0, columnspan=2, pady=5)
+    
+    run_button = tk.Button(button_frame, text="Exécuter", command=run_function ,bg="darkblue",fg="white")
+    run_button.pack(padx=10, pady=5)
 
     # Lancement de la boucle principale de l'interface graphique
     root.mainloop()
